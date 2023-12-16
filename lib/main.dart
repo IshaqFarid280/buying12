@@ -1,8 +1,11 @@
 import 'dart:convert';
+import 'package:buying/premiium/CategoryProvider.dart';
+import 'package:buying/premiium/category_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:in_app_purchase_android/in_app_purchase_android.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 void main() {
   InAppPurchaseAndroidPlatformAddition.enablePendingPurchases();
@@ -12,12 +15,12 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Subscription App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return ChangeNotifierProvider(
+      create: (context) => CategoryProvider(),
+      child: MaterialApp(
+        title: 'Your App Title',
+        home: YourHomePage(),
       ),
-      home: SubscriptionScreen(),
     );
   }
 }
@@ -142,12 +145,6 @@ class _SubscriptionScreenState extends State<SubscriptionScreen> {
       print('Error sending purchase details to the server: ${response.statusCode}');
     }
   }
-
-
-
-
-
-
 
   Future<void> verifySubscription(PurchaseDetails purchaseDetails) async {
     // Implement subscription verification logic on your server
