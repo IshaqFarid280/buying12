@@ -4,22 +4,22 @@ import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'CategoryProvider.dart';
 
-void main() {
-  runApp(MyApp());
-}
+// void main() {
+//   runApp(MyApp());
+// }
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => CategoryProvider(),
-      child: MaterialApp(
-        title: 'Your App Title',
-        home: YourHomePage(),
-      ),
-    );
-  }
-}
+// class MyAppp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return ChangeNotifierProvider(
+//       create: (context) => CategoryProvider(),
+//       child: MaterialApp(
+//         title: 'Your App Title',
+//         home: YourHomePage(),
+//       ),
+//     );
+//   }
+// }
 
 class YourHomePage extends StatelessWidget {
   @override

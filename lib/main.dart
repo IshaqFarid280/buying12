@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'package:buying/premiium/CategoryProvider.dart';
-import 'package:buying/premiium/category_screen.dart';
+import 'package:buying/premiium_all_exercises_categories/CategoryProvider.dart';
+import 'package:buying/premiium_all_exercises_categories/category_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:in_app_purchase_android/in_app_purchase_android.dart';
@@ -8,9 +8,14 @@ import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
 void main() {
-  InAppPurchaseAndroidPlatformAddition.enablePendingPurchases();
-  runApp(MyApp());
+  // InAppPurchaseAndroidPlatformAddition.enablePendingPurchases();
+  runApp(MyAppp());
 }
+//
+// void main() {
+//   InAppPurchaseAndroidPlatformAddition.enablePendingPurchases();
+//   runApp(MyApp());
+// }
 
 class MyApp extends StatelessWidget {
   @override
