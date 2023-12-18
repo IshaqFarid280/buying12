@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 
 void main() {
   // InAppPurchaseAndroidPlatformAddition.enablePendingPurchases();
-  runApp(MyAppp());
+  runApp(MyApp());
 }
 //
 // void main() {
