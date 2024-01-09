@@ -1,13 +1,19 @@
+
+
 import 'package:buying/premium_api_links/api_controller.dart';
+import 'package:buying/user_premium_info/user_premeium_form_screens/gender_selection_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:http/http.dart' as http;
 
 class SubscriptionProvider extends ChangeNotifier {
+  final BuildContext context;
+
+  SubscriptionProvider(this.context);
   InAppPurchase _inAppPurchase = InAppPurchase.instance;
 
-  Future<void> performInAppPurchase(userId) async {
+  Future<void> performInAppPurchase(BuildContext context, userId) async {
     final bool isAvailable = await _inAppPurchase.isAvailable();
     if (!isAvailable) {
       print('In-app purchases not available on this device.');
@@ -26,7 +32,7 @@ class SubscriptionProvider extends ChangeNotifier {
         for (PurchaseDetails purchaseDetails in purchaseDetailsList) {
           if (purchaseDetails.status == PurchaseStatus.purchased) {
             print('Transaction Date : ${purchaseDetails.transactionDate.toString()}');
-            await sendPurchaseDetailsToServer(purchaseDetails,userId);
+            await sendPurchaseDetailsToServer(purchaseDetails,userId).then((value) => Navigator.push(context, CupertinoPageRoute(builder: (context) => GenderSelectionScreen(userId: userId))));
           } else if (purchaseDetails.status == PurchaseStatus.error) {
             print('Purchase failed: ${purchaseDetails.error}');
           }
@@ -43,7 +49,7 @@ class SubscriptionProvider extends ChangeNotifier {
     print('Transaction Date: $formattedTransactionDate');
     print('userId from function: $userId');
     final response = await http.post(
-      Uri.parse('http://192.168.1.10:8000/api/subscription'),
+      Uri.parse('${ApiServices.basicUrl}/subscription'),
       body: {
         'user_id': userId.toString(),
         'subscription_plan': purchaseDetails.productID.toString(),
