@@ -1,4 +1,5 @@
-import 'package:admin_panel/consts/colors.dart';
+
+import 'package:buying/consts/colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextFeild extends StatelessWidget {

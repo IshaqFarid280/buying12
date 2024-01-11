@@ -1,5 +1,6 @@
-import 'package:admin_panel/consts/colors.dart';
-import 'package:admin_panel/reusable_widgets/text_widgets.dart';
+
+import 'package:buying/consts/colors.dart';
+import 'package:buying/widget/textwidgets.dart';
 import 'package:flutter/material.dart';
 
 

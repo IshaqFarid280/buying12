@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:buying/premium_api_links/api_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -45,7 +46,7 @@ class UserData {
 
 
 class UserProvider extends ChangeNotifier {
-  final String baseUrl = 'http://192.168.1.10:8000/api';
+  final String baseUrl = ApiServices.basicUrl;
 
   Future<UserResponse> signUp(String name, String email, String password, String confirmPassword) async {
     final url = Uri.parse('$baseUrl/signUp');

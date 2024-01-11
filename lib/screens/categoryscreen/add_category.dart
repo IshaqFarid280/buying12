@@ -1,4 +1,6 @@
-import 'package:buying/premiium_all_exercises_categories/CategoryProvider.dart';
+
+import 'package:buying/screens/categoryscreen/CategoryProvider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -11,7 +13,9 @@ class AddCategoryScreen extends StatelessWidget {
       CategoryProvider categoryProvider = Provider.of<CategoryProvider>(context, listen: false);
 
       // Call the addCategory method
-      await categoryProvider.addCategory(categoryName);
+      await categoryProvider.addCategory(categoryName).then((value){
+        Navigator.pop(context);
+      });
 
       // Do any additional logic after successfully adding the category
     } catch (error) {

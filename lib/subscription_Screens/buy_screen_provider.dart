@@ -8,9 +8,7 @@ import 'package:in_app_purchase/in_app_purchase.dart';
 import 'package:http/http.dart' as http;
 
 class SubscriptionProvider extends ChangeNotifier {
-  final BuildContext context;
 
-  SubscriptionProvider(this.context);
   InAppPurchase _inAppPurchase = InAppPurchase.instance;
 
   Future<void> performInAppPurchase(BuildContext context, userId) async {

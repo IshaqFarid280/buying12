@@ -1,9 +1,13 @@
 import 'package:buying/auth/authPorvider.dart';
+import 'package:buying/auth/signupscreen.dart';
+import 'package:buying/consts/colors.dart';
 import 'package:buying/main.dart';
+import 'package:buying/subscription_Screens/premiuim_buy.dart';
+import 'package:buying/widget/textwidgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
-import '../premium_buy_screens/premiuim_buy.dart';
 
 class LoginScreen extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
@@ -14,122 +18,95 @@ class LoginScreen extends StatelessWidget {
     final userProvider = Provider.of<UserProvider>(context);
 
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
-        title: Text('Login'),
+        backgroundColor: Colors.black,
+        title: largeText(title: 'Login')
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextFormField(
-              controller: emailController,
-              decoration: InputDecoration(labelText: 'Email'),
-            ),
-            TextFormField(
-              controller: passwordController,
-              obscureText: true,
-              decoration: InputDecoration(labelText: 'Password'),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () async {
-                try {
-                  final response = await userProvider.login(
-                    emailController.text,
-                    passwordController.text,
-                  );
-                  // Check if the login was successful
-                  if (response.message == 'Successfully login.') {
-                    print('userId: ${response.data.id}');
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => SubscriptionScreen(userId: response.data.id),
-                        ));
-                  } else {
-                    // Handle unsuccessful login, show a snackbar, etc.
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                            'Login failed. Please check your credentials.'),
-                      ),
-                    );
-                  }
-                } catch (e) {
-                  // Handle errors, e.g., show a snackbar with the error message
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('Failed to login. Please try again.'),
-                    ),
-                  );
-                }
-              },
-              child: Text('Login'),
-            ),
-            Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'If u have account, then',
-                    style: TextStyle(fontSize: 12),
-                  ),
-                  InkWell(
-                    onTap: () async {
-                      try {
-                         await userProvider
-                            .login(
-                              emailController.text,
-                              passwordController.text,
-                            )
-                            .then((response) => {
-// Check if the login was successful
-                                  if (response.message == 'Successfully login.')
-                                    {
-// Assuming you have the user data available from the login response
-//                     int userId = response1.data.id;
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
 
-// Navigate to the SubscriptionScreen with the userId
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              SubscriptionScreen(
-                                                  userId: response.data.id),
-                                        ),
-                                      ),
-                                    }
-                                  else
-                                    {
-// Handle unsuccessful login, show a snackbar, etc.
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        SnackBar(
-                                          content: Text(
-                                              'Login failed. Please check your credentials.'),
-                                        ),
-                                      ),
-                                    }
-                                });
-                      } catch (e) {
-// Handle errors, e.g., show a snackbar with the error message
+              SvgPicture.asset('assets/applogo.svg'),
+
+              textFormField(
+                  context: context,
+                  text: "Email",
+                  controller: emailController,
+                  hint: 'Email', obscuretext: false),
+              textFormField(
+                  context: context,
+                  text: "Password",
+                  controller: passwordController,
+                  hint: 'Password', obscuretext: true),
+
+              SizedBox(height: 100),
+              Container(
+                width: MediaQuery.of(context).size.width*0.6,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                    backgroundColor: goldenColor
+
+                  ),
+                  onPressed: () async {
+                    try {
+                      final response = await userProvider.login(
+                        emailController.text,
+                        passwordController.text,
+                      );
+                      // Check if the login was successful
+                      if (response.message == 'Successfully login.') {
+                        print('userId: ${response.data.id}');
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  SubscriptionScreen(userId: response.data.id),
+                            ));
+                      } else {
+                        // Handle unsuccessful login, show a snackbar, etc.
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Text('Failed to login. Please try again.'),
+                            content: Text(
+                                'Login failed. Please check your credentials.'),
                           ),
                         );
                       }
-                    },
-                    child: Text(
-                      'Sign in',
-                      style: TextStyle(fontSize: 12, color: Colors.purple),
-                    ),
-                  ),
-                ],
+                    } catch (e) {
+                      // Handle errors, e.g., show a snackbar with the error message
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Failed to login. Please try again.'),
+                        ),
+                      );
+                    }
+                  },
+                  child: normalText(title: 'Login', )
+                ),
               ),
-            )
-          ],
+              SizedBox(height: 5,),
+              Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    normalText(title: 'If u have account, then ', textSize: 12.0),
+                    SizedBox(width: 5,),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpScreen()));
+
+                      },
+                      child: normalText(textSize: 13.0, title: 'SignUp', color: goldenColor)
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

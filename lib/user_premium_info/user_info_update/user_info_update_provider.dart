@@ -70,9 +70,10 @@ class UserInformationUpdateProvider extends ChangeNotifier {
         final Map<String, dynamic> responseData = json.decode(response.body);
         final Map<String, dynamic> data = responseData['data'];
         final List<String> focus = List<String>.from(data['focus']);
+        // print(response.body);
         print('API response:update');
-        print('Error: ${response.statusCode}');
-        print('Error body: ${response.body}');
+        // print('Error: ${response.statusCode}');
+        // print('Error body: ${response.body}');
       } else {
         // Handle error response
         print('Error: ${response.statusCode}');

@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:buying/premiium_all_exercises_categories/exerciseProvider.dart';
+import 'package:buying/screens/categoryscreen/exerciseProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';

@@ -1,3 +1,4 @@
+import 'package:buying/bottomNavigationBar.dart';
 import 'package:buying/consts/colors.dart';
 import 'package:buying/user_premium_info/user_premeium_form_screens/gender_selection_screen.dart';
 import 'package:buying/widget/buttons.dart';
@@ -44,6 +45,22 @@ class SubscriptionScreen extends StatelessWidget {
 
                   },
                   child: normalText(title: 'Form Screen', textSize: 14.0)
+              ),
+            ),
+            SizedBox(height: 20),
+            Container(
+              width: MediaQuery.of(context).size.width*0.6,
+              child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                      backgroundColor: goldenColor
+
+                  ),
+                  onPressed: ()  {
+                    Navigator.push(context, CupertinoPageRoute(builder: (context) => BottomNavigationScreen(userId: userId)));
+
+                  },
+                  child: normalText(title: 'Routine Screen Screen', textSize: 14.0)
               ),
             ),
             SizedBox(height: 20),

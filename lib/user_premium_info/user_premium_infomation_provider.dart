@@ -1,4 +1,6 @@
+import 'package:buying/bottomNavigationBar.dart';
 import 'package:buying/premium_api_links/api_controller.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -47,9 +49,9 @@ class UserInformation {
 }
 
 class UserInformationProvider extends ChangeNotifier {
-
   Future<void> postUserInformation(UserInformation userInformation) async {
     final Uri uri = Uri.parse(ApiServices.postUserInfo);
+
     try {
       final response = await http.post(
         uri,
@@ -66,11 +68,11 @@ class UserInformationProvider extends ChangeNotifier {
           'focus[]': jsonEncode(userInformation.focus),
         },
       );
+      print('the status code ${response.statusCode}');
       if (response.statusCode == 200) {
+        print('in if condition: ${response.statusCode}');
         // Handle the successful response
         final Map<String, dynamic> responseData = json.decode(response.body);
-        final Map<String, dynamic> data = responseData['data'];
-        final List<String> focus = List<String>.from(data['focus']);
       } else {
         // Handle error response
         print('Error: ${response.statusCode}');
@@ -83,7 +85,6 @@ class UserInformationProvider extends ChangeNotifier {
 
   Future<void> deleteUserInformation(int userId) async {
     final response = await http.get(Uri.parse('${ApiServices.deleteUsersInfo}/$userId'));
-
     if (response.statusCode == 200) {
       // Successful deletion
       print('User information deleted successfully.');

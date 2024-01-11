@@ -1,19 +1,22 @@
+import 'package:buying/consts/colors.dart';
+import 'package:buying/widget/buttons.dart';
+import 'package:buying/widget/textwidgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'user_info_update_provider.dart';
 import 'package:flutter/cupertino.dart';
 
 class UserInfoUpdateScreen extends StatefulWidget {
-  final int userId ;
-  final double height;
-  final double weight;
-  final String gender;
-  final int age;
-  final List<String> goals;
-  final String experience;
-  final String equipment;
-  final List<String> interests;
-  final List<String> focus;
+  final int? userId ;
+  final double? height;
+  final double? weight;
+  final String? gender;
+  final int? age;
+  final List<String>? goals;
+  final String? experience;
+  final String? equipment;
+  final List<String>? interests;
+  final List<String>? focus;
   UserInfoUpdateScreen({
     required this.userId,
     required this.gender,
@@ -63,17 +66,24 @@ class _UserInfoUpdateScreenState extends State<UserInfoUpdateScreen> {
   Set<String> selectedInterests = Set();
   Set<String> selectedFocus = Set();
 
+  int selectedItem = 0;
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
+      backgroundColor: blackColor,
       appBar: AppBar(
-        title: Text('User Information Input'),
+        backgroundColor: blackColor,
+        leading: LeadingIcon(),
+        title: largeText(title: 'Profile Screen')
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Column(
           children: [
             SizedBox(height: 20),
+            normalText(title: 'Select Gender'),
             // Gender Selection
             CupertinoSegmentedControl(
               children: {
@@ -87,27 +97,51 @@ class _UserInfoUpdateScreenState extends State<UserInfoUpdateScreen> {
                 });
               },
               groupValue: genderController,
+
+              selectedColor: goldenColor, // Change color for selected segment
+              unselectedColor: Colors.white, // Change color for unselected segment
+              pressedColor: Colors.white, // Change color when pressed
+              borderColor: Colors.white, // Change border color
+              padding: EdgeInsets.all(10.0), // Adjust padding as needed
+
             ),
+
             SizedBox(height: 20),
             // Height Selection
-            Text('Select Height'),
-            CupertinoPicker(
-              itemExtent: 32.0,
-              onSelectedItemChanged: (index) {
-                setState(() {
-                  print(index.toString());
-                  heightController = index.toDouble();
-                });
-              },
-              children: List.generate(200, (index) => Text('${index + 1}')),
+            normalText(title: 'Select Height'),
+            Container(
+              width: MediaQuery.of(context).size.width*.45,
+              height: MediaQuery.of(context).size.height*.1,
+              child: CupertinoPicker(
+
+                itemExtent: 50.0,
+                onSelectedItemChanged: (index) {
+                  setState(() {
+                    print(index.toString());
+                    heightController = index.toDouble();
+                  });
+                },
+                children: List.generate(200, (index) => AnimatedContainer(
+                    width: MediaQuery.of(context).size.width*.5,
+
+                  duration: Duration(microseconds: 300),
+                    decoration: BoxDecoration(
+                      color: greyColor,
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    child: Center(child: normalText(title: '${index + 1}', textSize: 14.0)))),
+              ),
             ),
             SizedBox(height: 20),
             // Weight Selection
-            Text('Select Weight'),
+            normalText(title: 'Select Weight'),
+
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Container(
-                  width: MediaQuery.of(context).size.width / 2, // Set the width you desire
+                  width: MediaQuery.of(context).size.width*0.45,
+                  height: MediaQuery.of(context).size.height*0.1,
                   child: CupertinoPicker(
                     itemExtent: 32.0,
                     onSelectedItemChanged: (index) {
@@ -116,11 +150,23 @@ class _UserInfoUpdateScreenState extends State<UserInfoUpdateScreen> {
                         weightIntController = index;
                       });
                     },
-                    children: List.generate(200, (index) => Text('$index')),
+                    children: List.generate(200, (index) => AnimatedContainer(
+                        width: MediaQuery.of(context).size.width*.5,
+
+                        duration: Duration(microseconds: 300),
+                        decoration: BoxDecoration(
+                          color: greyColor,
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Center(child: normalText(title: '$index', textSize: 14.0)))),
                   ),
                 ),
+                SizedBox(
+                  width: 10,
+                ),
                 Container(
-                  width: MediaQuery.of(context).size.width / 2, // Set the width you desire
+                  width: MediaQuery.of(context).size.width*0.45,
+                  height: MediaQuery.of(context).size.height*0.1,// Set the width you desire
                   child: CupertinoPicker(
                     itemExtent: 32.0,
                     onSelectedItemChanged: (index) {
@@ -129,27 +175,52 @@ class _UserInfoUpdateScreenState extends State<UserInfoUpdateScreen> {
                         weightDecimalController = index.toDouble() / 10;
                       });
                     },
-                    children: List.generate(9, (index) => Text('.${index + 1}')),
+                    children: List.generate(9, (index) => AnimatedContainer(
+                        width: MediaQuery.of(context).size.width*.5,
+
+                        duration: Duration(microseconds: 300),
+                        decoration: BoxDecoration(
+                          color: greyColor,
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Center(child: normalText(title: '.${index + 1}', textSize: 14.0)))),
                   ),
                 ),
               ],
             ),
             SizedBox(height: 20),
             // Age Selection
-            Text('Select Age'),
-            CupertinoPicker(
-              itemExtent: 32.0,
-              onSelectedItemChanged: (index) {
-                setState(() {
-                  print(index.toString());
-                  ageController = index + 1;
-                });
-              },
-              children: List.generate(100, (index) => Text('${index + 1}')),
-            ),
+            normalText(title: 'Select Age'),
+
+            Container(
+              width: MediaQuery.of(context).size.width * 0.45,
+              height: MediaQuery.of(context).size.height * 0.1,
+              child: CupertinoPicker(
+                itemExtent: 32.0,
+                onSelectedItemChanged: (index) {
+                  setState(() {
+                    print(index.toString());
+                    ageController = index + 1;
+                  });
+                },
+                children: List.generate(
+                  9,
+                      (index) => AnimatedContainer(
+                    width: MediaQuery.of(context).size.width * 0.5,
+                    duration: Duration(milliseconds: 300),
+                    decoration: BoxDecoration(
+                      color: index == (weightDecimalController * 10).toInt() ? Colors.transparent : greyColor,
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    child: Center(child: normalText(title: '${index + 1}', textSize: 14.0)),
+                  ),
+                ),
+              ),
+            )
+,
             SizedBox(height: 20),
             // Goal Selection
-            Text('Select Goal(s)'),
+            normalText(title: 'Select Goal(s)'),
             Wrap(
               children: goalController.map(
                     (goal) => ChoiceChip(
@@ -165,8 +236,10 @@ class _UserInfoUpdateScreenState extends State<UserInfoUpdateScreen> {
                       }
                     });
                   },
-                  selectedColor: Colors.green, // Change the color when selected
-                  labelStyle: TextStyle(
+                  selectedColor: goldenColor, // Change the color when selected
+                      avatar: selectedGoals.contains(goal)
+                          ? Icon(Icons.check, color: Colors.white)  // Set the color of the checkmark
+                          : null,     labelStyle: TextStyle(
                     color: selectedGoals.contains(goal) ? Colors.white : Colors.black,
                   ),
                 ),
@@ -174,7 +247,7 @@ class _UserInfoUpdateScreenState extends State<UserInfoUpdateScreen> {
             ),
             SizedBox(height: 20),
             // Experience Selection
-            Text('Select Experience Level'),
+            normalText(title: 'Select Experience Level'),
             CupertinoSegmentedControl(
               children: {
                 'New to Exercise': Text('New'),
@@ -192,7 +265,7 @@ class _UserInfoUpdateScreenState extends State<UserInfoUpdateScreen> {
             ),
             SizedBox(height: 20),
             // Equipment Selection
-            Text('Select Equipment'),
+            normalText(title: 'Select Equipment'),
             CupertinoSegmentedControl(
               children: {
                 'Gym': Text('Gym'),
@@ -209,6 +282,7 @@ class _UserInfoUpdateScreenState extends State<UserInfoUpdateScreen> {
             ),
             SizedBox(height: 20),
             // Interest Selection
+            normalText(title: 'Select Interest(s)'),
             Text('Select Interest(s)'),
             Wrap(
               children: interestController.map(
@@ -234,7 +308,7 @@ class _UserInfoUpdateScreenState extends State<UserInfoUpdateScreen> {
             ),
             SizedBox(height: 20),
             // Focus Selection
-            Text('Select Focus Area(s)'),
+            normalText(title: 'Select Focus Area(s)'),
             Wrap(
               children: focusController.map(
                     (focus) => ChoiceChip(
