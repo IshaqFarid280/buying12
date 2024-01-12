@@ -45,10 +45,9 @@ dependencies:
   image_picker: ^1.0.5
   flutter_svg: ^2.0.9
   lottie: ^2.7.0
-
   velocity_x: 3.6.0
-
   flutter_slidable:
+  shared_preferences: ^2.0.12
 
 dev_dependencies:
   flutter_test:

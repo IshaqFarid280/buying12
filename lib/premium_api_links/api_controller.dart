@@ -2,7 +2,7 @@
 
 
 class  ApiServices {
-  static String  basicUrl = 'http://192.168.1.19:8000/api';
+  static String  basicUrl = 'http://192.168.238.54:8000/api';
   static String  getAllCategories = '$basicUrl/category';
 
   static String  postAllCategories = '$basicUrl/category/store';

@@ -9,6 +9,7 @@ import 'package:buying/screens/routinescreen/days_exercise_screen/days_exercise_
 import 'package:buying/screens/routinescreen/days_screen/days_provider.dart';
 import 'package:buying/screens/routinescreen/setscreen/sets_provider.dart';
 import 'package:buying/screens/routinescreen/user_program_screen/user_program_provider.dart';
+import 'package:buying/splash_screen/splash_screen.dart';
 import 'package:buying/subscription_Screens/buy_screen_provider.dart';
 import 'package:buying/user_premium_info/user_info_update/user_info_update_provider.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +42,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Your App Title',
-      home: LoginScreen(),
+      home: SplashScreen(),
     );
   }
 }

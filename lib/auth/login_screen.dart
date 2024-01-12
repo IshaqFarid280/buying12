@@ -1,7 +1,6 @@
 import 'package:buying/auth/authPorvider.dart';
 import 'package:buying/auth/signupscreen.dart';
 import 'package:buying/consts/colors.dart';
-import 'package:buying/main.dart';
 import 'package:buying/subscription_Screens/premiuim_buy.dart';
 import 'package:buying/widget/textwidgets.dart';
 import 'package:flutter/material.dart';

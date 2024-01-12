@@ -1,9 +1,8 @@
 import 'package:buying/auth/login_screen.dart';
 import 'package:buying/consts/colors.dart';
-import 'package:buying/main.dart';
 import 'package:buying/subscription_Screens/premiuim_buy.dart';
-import 'package:buying/widget/buttons.dart';
 import 'package:buying/widget/textwidgets.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -115,7 +114,7 @@ class SignUpScreen extends StatelessWidget {
                     SizedBox(width: 5,),
                     InkWell(
                         onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
+                          Navigator.push(context, CupertinoPageRoute(builder: (context) => LoginScreen()));
 
                         },
                         child: normalText(textSize: 13.0, title: 'Login', color: goldenColor)
