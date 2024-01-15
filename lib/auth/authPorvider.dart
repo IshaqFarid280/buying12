@@ -170,7 +170,7 @@ class UserProvider extends ChangeNotifier {
   // Subscription method
   Future<SubscriptionModel> fetchSubscriptionData(String userId) async {
     print('before function hit suscrition : $userId');
-    final url = Uri.parse('$baseUrl/api/subscription?user_id=$userId');
+    final url = Uri.parse('$baseUrl/subscription?user_id=$userId');
     final response = await http.get(url);
     print('suscrition : $userId');
     print('suscrition : ${response.statusCode}');
